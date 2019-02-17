@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">TrainingApp</string>
+    <string name="app_error_dismiss" translatable="false">OK</string>
+    <string name="app_navigation_drawer_open">Open navigation drawer</string>
+    <string name="app_navigation_drawer_close">Close navigation drawer</string>
+    <string name="no_internet">No internet connection</string>
+    <string name="statistics">Statistics</string>
+    <string name="training_history">Training History</string>
+    <string name="achievements">Achievements</string>
+    <string name="training">Training</string>
+    <string name="enter_training_name">Enter Training Name</string>
+    <string name="here">Here</string>
+    <string name="add_exercises">ADD EXERCISES</string>
+    <string name="enter_name_for_new_exercise">Enter name for new exercise</string>
+    <string name="biceps">Biceps</string>
+    <string name="triceps">Triceps</string>
+    <string name="shoulders">Shoulders</string>
+    <string name="legs">Legs</string>
+    <string name="chest">Chest</string>
+    <string name="back">Back</string>
+    <string name="abs">Abs</string>
+    <string name="create">Create</string>
+
+
+</resources>

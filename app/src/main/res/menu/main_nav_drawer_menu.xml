@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <group
+        android:id="@+id/group_1"
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/training_choice_menu"
+            android:icon="@drawable/ic_fitness_center_black_24dp"
+            android:title="@string/training"
+            app:showAsAction="withText" />
+
+        <item
+            android:id="@+id/statistics_menu"
+            android:icon="@drawable/ic_statistics_black_24dp"
+            android:title="@string/statistics"
+            app:showAsAction="withText" />
+        <item
+            android:id="@+id/story_menu"
+            android:icon="@drawable/ic_story_black_24dp"
+            android:title="@string/training_history"
+            app:showAsAction="withText" />
+        <item
+            android:id="@+id/achievements_menu"
+            android:icon="@drawable/ic_achievements_black_24dp"
+            android:title="@string/achievements"
+            app:showAsAction="withText" />
+
+    </group>
+
+    <!--<group
+        android:id="@+id/group_2"
+        android:checkableBehavior="none">
+        <item
+            android:id="@+id/nav_contact"
+            android:icon="@mipmap/contact_us"
+            android:title="Contact Us"
+            app:showAsAction="withText" />
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@mipmap/logout"
+            android:title="Log Out"
+            app:showAsAction="withText" />
+    </group>-->
+
+
+</menu>
