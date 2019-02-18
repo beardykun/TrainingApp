@@ -34,15 +34,19 @@ class ExercisesChoiceAdapter(private val list: ArrayList<ExerciseObject>) :
     }
 
     override fun onBindViewHolder(holder: ExercisesChoiceViewHolder, position: Int) {
-        if (listener != null){
-            holder.itemView.setOnClickListener {
+        if (list.isNotEmpty()) {
+            if (listener != null) {
+                holder.itemView.setOnClickListener {
 
-                listener?.onExerciseChoiceItemClick(list[position].exerciseName, holder.itemView)
+                    listener?.onExerciseChoiceItemClick(list[position].exerciseName, holder.itemView)
+                }
             }
-        }
 
             holder.text.text = list[position].exerciseName
             holder.image.imageResource = list[position].exerciseImage.toInt()
+        }else{
+            holder.text.text = "No exercises"
+        }
     }
 
     class ExercisesChoiceViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

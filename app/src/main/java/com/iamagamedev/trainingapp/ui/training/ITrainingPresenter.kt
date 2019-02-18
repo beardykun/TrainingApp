@@ -9,5 +9,4 @@ interface ITrainingPresenter:IGeneralPresenter {
     fun updateSet(newItem: String)
     fun deleteTraining(name: String)
     fun startTraining()
-    fun getAdapter()
 }

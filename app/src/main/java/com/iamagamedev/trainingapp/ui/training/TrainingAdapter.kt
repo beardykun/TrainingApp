@@ -9,10 +9,11 @@ import com.iamagamedev.trainingapp.R
 import com.iamagamedev.trainingapp.dataBase.objects.TrainingObject
 import org.jetbrains.anko.find
 
-class TrainingAdapter(private val trainingList: List<TrainingObject>) : RecyclerView.Adapter<TrainingAdapter.TrainingViewHolder>() {
+class TrainingAdapter : RecyclerView.Adapter<TrainingAdapter.TrainingViewHolder>() {
 
     private var listener: OnTrainingItemListener? = null
     private var listenerLong: OnTrainingItemLongListener? = null
+    private var trainingList: List<TrainingObject>? = null
 
     interface OnTrainingItemListener {
         fun onTrainingListItemClick(name: String)
@@ -37,21 +38,32 @@ class TrainingAdapter(private val trainingList: List<TrainingObject>) : Recycler
     }
 
     override fun getItemCount(): Int {
-        return trainingList.size
+        return if (trainingList == null){
+            0
+        }else
+            trainingList!!.size
+    }
+
+    fun swapAdapter(list: List<TrainingObject>){
+        trainingList = list
     }
 
     override fun onBindViewHolder(holder: TrainingViewHolder, position: Int) {
-        if (listener != null) {
-            holder.itemView.setOnClickListener {
-                listener?.onTrainingListItemClick(trainingList[holder.adapterPosition].trainingName)
+        if (trainingList != null) {
+            if (listener != null) {
+                holder.itemView.setOnClickListener {
+                    listener?.onTrainingListItemClick(trainingList!![holder.adapterPosition].trainingName)
+                }
+                holder.itemView.setOnLongClickListener {
+                    listenerLong?.onTrainingListItemLongClick(trainingList!![holder.adapterPosition].trainingName)
+                    true
+                }
             }
-            holder.itemView.setOnLongClickListener {
-                listenerLong?.onTrainingListItemLongClick(trainingList[holder.adapterPosition].trainingName)
-                true
-            }
-        }
 
-        holder.text.text = trainingList[position].trainingName
+            holder.text.text = trainingList!![position].trainingName
+        }else{
+            holder.text.text = "Empty List"
+        }
     }
 
     class TrainingViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

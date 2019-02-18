@@ -8,11 +8,9 @@ interface ITrainingInteractor {
         fun onSuccess()
         fun onDeleteSuccess()
         fun onSuccessStartThisTrainingActivity()
-        fun onSuccessSetAdapter(adapter: TrainingAdapter)
     }
 
     fun updateSet(newItem: String, listener: OnTrainingListener)
     fun deleteTraining(name: String, listener: OnTrainingListener)
     fun startTraining(listener: OnTrainingListener)
-    fun getAdapter(listener: OnTrainingListener)
 }

@@ -7,5 +7,4 @@ interface ITrainingView : IGeneralView {
     fun updateList(trainingName: String)
 
     fun startActivity()
-    fun setAdapter(adapter: TrainingAdapter)
 }

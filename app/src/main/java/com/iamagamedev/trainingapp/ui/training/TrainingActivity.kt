@@ -1,9 +1,14 @@
 package com.iamagamedev.trainingapp.ui.training
 
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProvider
+import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import com.iamagamedev.trainingapp.R
 import com.iamagamedev.trainingapp.app.Constants
 import com.iamagamedev.trainingapp.app.MySharedPreferences
+import com.iamagamedev.trainingapp.dataBase.TrainingViewModel
+import com.iamagamedev.trainingapp.dataBase.objects.TrainingObject
 import com.iamagamedev.trainingapp.ui.general.GeneralActivityWithAppBar
 import com.iamagamedev.trainingapp.ui.thisTraining.ThisTrainingActivity
 import kotlinx.android.synthetic.main.activity_training.*
@@ -11,29 +16,34 @@ import org.jetbrains.anko.alert
 import org.jetbrains.anko.noButton
 import org.jetbrains.anko.yesButton
 
+
 class TrainingActivity : GeneralActivityWithAppBar(), ITrainingView,
-        TrainingAdapter.OnTrainingItemListener, TrainingAdapter.OnTrainingItemLongListener{
+        TrainingAdapter.OnTrainingItemListener, TrainingAdapter.OnTrainingItemLongListener {
 
     private var presenter: ITrainingPresenter? = null
+    private var trainingViewModel: TrainingViewModel? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_training)
 
         presenter = TrainingPresenter()
+        trainingViewModel = ViewModelProviders.of(this).get(TrainingViewModel::class.java)
+
     }
 
     override fun onTrainingListItemClick(name: String) {
         MySharedPreferences.saveString(Constants.SAVE_TRAINING_NAME, name)
-        alert ("Start Training", "Start training timer?"){
+        alert("Start Training", "Start training timer?") {
             yesButton { presenter?.startTraining() }
-            noButton {  }
+            noButton { }
         }.show()
     }
 
     override fun onTrainingListItemLongClick(name: String) {
-        alert("Delete", "Want to delete this Training?"){
+        alert("Delete", "Want to delete this Training?") {
             yesButton { presenter?.deleteTraining(name) }
-            noButton {  }
+            noButton { }
         }.show()
     }
 
@@ -45,7 +55,10 @@ class TrainingActivity : GeneralActivityWithAppBar(), ITrainingView,
             val fragment = CreateTrainingFragment()
             fragment.show(fm, "tag")
         }
-        presenter?.getAdapter()
+        val adapter = TrainingAdapter()
+        trainingViewModel?.getTrainings()?.observe(this, Observer<List<TrainingObject>> {
+            trainingList -> adapter.swapAdapter(trainingList!!) })
+        setAdapter(adapter)
     }
 
     override fun onStop() {
@@ -69,7 +82,7 @@ class TrainingActivity : GeneralActivityWithAppBar(), ITrainingView,
         showErrorSnack(error.toString())
     }
 
-    override fun setAdapter(adapter: TrainingAdapter) {
+    private fun setAdapter(adapter: TrainingAdapter) {
         adapter.setOnTrainingItemListener(this)
         adapter.setOnTrainingItemLongListener(this)
         trainingRecyclerView.adapter = adapter

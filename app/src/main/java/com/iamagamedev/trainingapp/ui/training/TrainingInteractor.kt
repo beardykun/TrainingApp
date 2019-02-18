@@ -5,8 +5,6 @@ import com.iamagamedev.trainingapp.app.MySharedPreferences
 import com.iamagamedev.trainingapp.app.ThisApplication
 import com.iamagamedev.trainingapp.dataBase.objects.TrainingObject
 import com.iamagamedev.trainingapp.dataBase.repositories.TrainingRepository
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.uiThread
 
 class TrainingInteractor : ITrainingInteractor {
 
@@ -35,16 +33,5 @@ class TrainingInteractor : ITrainingInteractor {
             MySharedPreferences.saveLong(Constants.SAVE_START_TIME, startTime)
         }
         listener.onSuccessStartThisTrainingActivity()
-    }
-
-    override fun getAdapter(listener: ITrainingInteractor.OnTrainingListener) {
-        val repository = TrainingRepository(ThisApplication.instance)
-        doAsync {
-            val list = repository.returnAllTrainings()
-            uiThread {
-                val adapter = TrainingAdapter(list.value!!)
-                listener.onSuccessSetAdapter(adapter)
-            }
-        }
     }
 }

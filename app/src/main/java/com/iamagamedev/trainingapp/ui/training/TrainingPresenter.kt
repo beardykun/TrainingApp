@@ -1,5 +1,7 @@
 package com.iamagamedev.trainingapp.ui.training
 
+import com.iamagamedev.trainingapp.dataBase.objects.TrainingObject
+
 class TrainingPresenter(private val interactor: ITrainingInteractor = TrainingInteractor())
     : ITrainingPresenter, ITrainingInteractor.OnTrainingListener {
 
@@ -49,15 +51,5 @@ class TrainingPresenter(private val interactor: ITrainingInteractor = TrainingIn
     override fun onSuccessStartThisTrainingActivity() {
         view?.hideProgress()
         view?.startActivity()
-    }
-
-    override fun getAdapter() {
-        view?.showProgress()
-        interactor.getAdapter(this)
-    }
-
-    override fun onSuccessSetAdapter(adapter: TrainingAdapter) {
-        view?.hideProgress()
-        view?.setAdapter(adapter)
     }
 }

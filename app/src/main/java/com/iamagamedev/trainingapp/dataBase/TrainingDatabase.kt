@@ -10,21 +10,21 @@ import com.iamagamedev.trainingapp.dataBase.objects.ExerciseObject
 import com.iamagamedev.trainingapp.dataBase.objects.TrainingObject
 
 @Database(entities = [ExerciseObject::class, TrainingObject::class], version = 1)
-abstract class TrainingDatabace : RoomDatabase() {
+abstract class TrainingDatabase : RoomDatabase() {
 
     abstract fun exerciseDao(): ExerciseDao
     abstract fun trainingDao(): TrainingDao
 
     companion object {
         @Volatile
-        private var INSTANCE: TrainingDatabace? = null
+        private var INSTANCE: TrainingDatabase? = null
 
-        fun getDatabase(context: Context): TrainingDatabace? {
+        fun getDatabase(context: Context): TrainingDatabase? {
             if (INSTANCE == null) {
-                synchronized(TrainingDatabace::class.java) {
+                synchronized(TrainingDatabase::class.java) {
                     if (INSTANCE == null) {
                         INSTANCE = Room.databaseBuilder(context.applicationContext,
-                                TrainingDatabace::class.java,
+                                TrainingDatabase::class.java,
                                 DatabaseContract.DATABASE_NAME).build()
                     }
                 }

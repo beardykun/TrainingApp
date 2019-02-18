@@ -2,7 +2,7 @@ package com.iamagamedev.trainingapp.dataBase.repositories
 
 import android.app.Application
 import android.arch.lifecycle.LiveData
-import com.iamagamedev.trainingapp.dataBase.TrainingDatabace
+import com.iamagamedev.trainingapp.dataBase.TrainingDatabase
 import com.iamagamedev.trainingapp.dataBase.dao.ExerciseDao
 import com.iamagamedev.trainingapp.dataBase.objects.ExerciseObject
 import org.jetbrains.anko.doAsync
@@ -12,7 +12,7 @@ class ExerciseRepository(application: Application) {
     private val exerciseDao: ExerciseDao
 
     init {
-        val db = TrainingDatabace.getDatabase(application)
+        val db = TrainingDatabase.getDatabase(application)
         exerciseDao = db!!.exerciseDao()
     }
 
