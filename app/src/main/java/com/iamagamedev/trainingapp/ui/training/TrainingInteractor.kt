@@ -3,6 +3,7 @@ package com.iamagamedev.trainingapp.ui.training
 import com.iamagamedev.trainingapp.app.Constants
 import com.iamagamedev.trainingapp.app.MySharedPreferences
 import com.iamagamedev.trainingapp.app.ThisApplication
+import com.iamagamedev.trainingapp.dataBase.TrainingViewModel
 import com.iamagamedev.trainingapp.dataBase.objects.TrainingObject
 import com.iamagamedev.trainingapp.dataBase.repositories.TrainingRepository
 
@@ -20,10 +21,9 @@ class TrainingInteractor : ITrainingInteractor {
     }
 
 
-    override fun updateSet(newItem: String, listener: ITrainingInteractor.OnTrainingListener) {
-        val repository = TrainingRepository(ThisApplication.instance)
+    override fun updateSet(viewModel: TrainingViewModel, newItem: String, listener: ITrainingInteractor.OnTrainingListener) {
         val newTraining = TrainingObject(null, newItem)
-        repository.insertTrainingAsync(newTraining)
+        viewModel.insertTraining(newTraining)
         listener.onSuccess()
     }
 

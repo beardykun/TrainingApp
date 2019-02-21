@@ -38,14 +38,15 @@ class TrainingAdapter : RecyclerView.Adapter<TrainingAdapter.TrainingViewHolder>
     }
 
     override fun getItemCount(): Int {
-        return if (trainingList == null){
-            0
-        }else
+        return if (trainingList != null){
             trainingList!!.size
+        }else
+            0
     }
 
     fun swapAdapter(list: List<TrainingObject>){
         trainingList = list
+        notifyDataSetChanged()
     }
 
     override fun onBindViewHolder(holder: TrainingViewHolder, position: Int) {

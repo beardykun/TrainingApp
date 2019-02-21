@@ -1,34 +1,42 @@
 package com.iamagamedev.trainingapp.ui.thisTraining
 
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import com.iamagamedev.trainingapp.R
+import com.iamagamedev.trainingapp.app.Constants
+import com.iamagamedev.trainingapp.app.MySharedPreferences
+import com.iamagamedev.trainingapp.dataBase.TrainingViewModel
+import com.iamagamedev.trainingapp.dataBase.objects.TrainingObject
 import com.iamagamedev.trainingapp.ui.general.GeneralActivityWithAppBar
-import com.iamagamedev.trainingapp.utils.Utils
 import kotlinx.android.synthetic.main.activity_this_training.*
-import org.jetbrains.anko.toast
 
 class ThisTrainingActivity : GeneralActivityWithAppBar(), IThisTrainingView {
 
     private var presenter: IThisTrainingPresenter? = null
+    private var trainingViewModel: TrainingViewModel? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_this_training)
 
         presenter = ThisTrainingPresenter()
-        toast(Utils.getCurrentTime())
-        presenter?.getAdapter()
+        trainingViewModel = ViewModelProviders.of(this).get(TrainingViewModel::class.java)
     }
 
     override fun onStart() {
         super.onStart()
         presenter?.onAttachView(this)
+        trainingViewModel?.getTraining(MySharedPreferences.getString(Constants.SAVE_TRAINING_NAME))
+                ?.observe(this, Observer<TrainingObject> { training ->
+                    presenter?.getAdapter(training!!)
+                })
         fabThisTraining.setOnClickListener { presenter?.addExercise() }
     }
 
-    override fun onDestroy() {
+    override fun onStop() {
         presenter?.onDetachView()
-        super.onDestroy()
+        super.onStop()
     }
 
     override fun showProgress() {

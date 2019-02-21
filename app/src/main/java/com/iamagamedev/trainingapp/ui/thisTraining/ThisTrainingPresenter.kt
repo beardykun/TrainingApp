@@ -1,5 +1,8 @@
 package com.iamagamedev.trainingapp.ui.thisTraining
 
+import com.iamagamedev.trainingapp.dataBase.TrainingViewModel
+import com.iamagamedev.trainingapp.dataBase.objects.TrainingObject
+
 class ThisTrainingPresenter(private val interactor: IThisTrainingInteractor = ThisTrainingInteractor())
     : IThisTrainingPresenter, IThisTrainingInteractor.OnThisTrainingListener {
 
@@ -31,9 +34,9 @@ class ThisTrainingPresenter(private val interactor: IThisTrainingInteractor = Th
         view?.showError(error, code)
     }
 
-    override fun getAdapter() {
+    override fun getAdapter(training: TrainingObject) {
         view?.showProgress()
-        interactor.getAdapter(this)
+        interactor.getAdapter(training, this)
     }
 
     override fun getAdapterSuccess(adapter: ThisTrainingAdapter) {

@@ -1,5 +1,6 @@
 package com.iamagamedev.trainingapp.ui.training
 
+import com.iamagamedev.trainingapp.dataBase.TrainingViewModel
 import com.iamagamedev.trainingapp.dataBase.objects.TrainingObject
 
 class TrainingPresenter(private val interactor: ITrainingInteractor = TrainingInteractor())
@@ -15,9 +16,9 @@ class TrainingPresenter(private val interactor: ITrainingInteractor = TrainingIn
         this.view = null
     }
 
-    override fun updateSet(newItem: String) {
+    override fun updateSet(viewModel: TrainingViewModel, newItem: String) {
         view?.showProgress()
-        interactor.updateSet(newItem, this)
+        interactor.updateSet(viewModel, newItem, this)
     }
 
     override fun onSuccess() {

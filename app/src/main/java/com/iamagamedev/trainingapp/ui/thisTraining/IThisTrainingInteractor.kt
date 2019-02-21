@@ -1,5 +1,7 @@
 package com.iamagamedev.trainingapp.ui.thisTraining
 
+import com.iamagamedev.trainingapp.dataBase.TrainingViewModel
+import com.iamagamedev.trainingapp.dataBase.objects.TrainingObject
 import com.iamagamedev.trainingapp.ui.general.IGeneralInteractorListener
 
 interface IThisTrainingInteractor {
@@ -12,5 +14,5 @@ interface IThisTrainingInteractor {
 
     fun addExercise()
 
-    fun getAdapter(listener: OnThisTrainingListener)
+    fun getAdapter(training: TrainingObject, listener: OnThisTrainingListener)
 }

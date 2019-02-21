@@ -29,13 +29,13 @@ class TrainingActivity : GeneralActivityWithAppBar(), ITrainingView,
 
         presenter = TrainingPresenter()
         trainingViewModel = ViewModelProviders.of(this).get(TrainingViewModel::class.java)
-
     }
 
     override fun onTrainingListItemClick(name: String) {
-        MySharedPreferences.saveString(Constants.SAVE_TRAINING_NAME, name)
         alert("Start Training", "Start training timer?") {
-            yesButton { presenter?.startTraining() }
+            yesButton {
+                MySharedPreferences.saveString(Constants.SAVE_TRAINING_NAME, name)
+                presenter?.startTraining() }
             noButton { }
         }.show()
     }
@@ -55,10 +55,7 @@ class TrainingActivity : GeneralActivityWithAppBar(), ITrainingView,
             val fragment = CreateTrainingFragment()
             fragment.show(fm, "tag")
         }
-        val adapter = TrainingAdapter()
-        trainingViewModel?.getTrainings()?.observe(this, Observer<List<TrainingObject>> {
-            trainingList -> adapter.swapAdapter(trainingList!!) })
-        setAdapter(adapter)
+        setAdapter()
     }
 
     override fun onStop() {
@@ -82,14 +79,17 @@ class TrainingActivity : GeneralActivityWithAppBar(), ITrainingView,
         showErrorSnack(error.toString())
     }
 
-    private fun setAdapter(adapter: TrainingAdapter) {
+    private fun setAdapter() {
+        val adapter = TrainingAdapter()
+        trainingViewModel?.getTrainings()?.observe(this, Observer<List<TrainingObject>> {
+            trainingList -> adapter.swapAdapter(trainingList!!) })
         adapter.setOnTrainingItemListener(this)
         adapter.setOnTrainingItemLongListener(this)
         trainingRecyclerView.adapter = adapter
     }
 
     override fun updateList(trainingName: String) {
-        presenter?.updateSet(trainingName)
+        presenter?.updateSet(trainingViewModel!!, trainingName)
     }
 
     override fun startActivity() {
