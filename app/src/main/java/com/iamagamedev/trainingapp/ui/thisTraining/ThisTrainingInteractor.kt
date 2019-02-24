@@ -18,7 +18,8 @@ class ThisTrainingInteractor : IThisTrainingInteractor {
     override fun getAdapter(training: TrainingObject, listener: IThisTrainingInteractor.OnThisTrainingListener) {
         try {
             val list = Utils.stringToList(training.trainingExerciseName)
-            val adapter = ThisTrainingAdapter(list)
+            val adapter = ThisTrainingAdapter()
+            adapter.swapAdapter(list)
             MySharedPreferences.saveString(Constants.SAVE_NEW_EXERCISE_LIST, Utils.listToString(list))
             listener.getAdapterSuccess(adapter)
         } catch (e: IllegalStateException) {

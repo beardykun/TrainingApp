@@ -8,8 +8,9 @@ import android.widget.TextView
 import com.iamagamedev.trainingapp.R
 import org.jetbrains.anko.find
 
-class ThisTrainingAdapter(private val list: MutableList<String>) :
-        RecyclerView.Adapter<ThisTrainingAdapter.ThisTrainingViewHolder>() {
+class ThisTrainingAdapter : RecyclerView.Adapter<ThisTrainingAdapter.ThisTrainingViewHolder>() {
+
+    private var list: MutableList<String>? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, p1: Int): ThisTrainingViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -19,11 +20,19 @@ class ThisTrainingAdapter(private val list: MutableList<String>) :
     }
 
     override fun getItemCount(): Int {
-        return list.size
+        return if (list == null)
+            0
+        else
+            list!!.size
     }
 
     override fun onBindViewHolder(holder: ThisTrainingViewHolder, position: Int) {
-        holder.text.text = list[position]
+        if (list != null)
+            holder.text.text = list!![position]
+    }
+
+    fun swapAdapter(list: MutableList<String>) {
+        this.list = list
     }
 
     class ThisTrainingViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
