@@ -20,7 +20,7 @@ class ExerciseRepository(application: Application) {
         return exerciseDao.getAllExercises()
     }
 
-    fun detExersiseWithName(exName: String):LiveData<ExerciseObject>{
+    fun getExerciseWithName(exName: String):LiveData<ExerciseObject>{
         return exerciseDao.getExerciseWithName(exName)
     }
 

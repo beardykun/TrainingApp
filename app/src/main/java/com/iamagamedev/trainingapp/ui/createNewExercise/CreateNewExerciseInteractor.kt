@@ -1,10 +1,8 @@
 package com.iamagamedev.trainingapp.ui.createNewExercise
 
 import com.iamagamedev.trainingapp.app.ThisApplication
-import com.iamagamedev.trainingapp.dataBase.DatabaseContract
 import com.iamagamedev.trainingapp.dataBase.objects.ExerciseObject
 import com.iamagamedev.trainingapp.dataBase.repositories.ExerciseRepository
-import com.iamagamedev.trainingapp.utils.Utils
 
 class CreateNewExerciseInteractor(
         private val exerciseObject: ExerciseObject = ExerciseObject(null))
@@ -12,7 +10,7 @@ class CreateNewExerciseInteractor(
 
     override fun addValidateFields(listener: ICreateNewExerciseInteractor.OnCreateNewExerciseListener) {
         if (exerciseObject.exerciseGroup != "" && exerciseObject.exerciseName != "" && exerciseObject.exerciseImage != "") {
-            val exerciseInDB = ExerciseRepository(ThisApplication.instance).detExersiseWithName(exerciseObject.exerciseName)
+            val exerciseInDB = ExerciseRepository(ThisApplication.instance).getExerciseWithName(exerciseObject.exerciseName)
             if (exerciseInDB == null) {
                 listener.onError("Already in DB", 11)
             } else {

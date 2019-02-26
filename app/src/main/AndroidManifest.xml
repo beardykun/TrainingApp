@@ -26,10 +26,6 @@
             android:parentActivityName=".ui.main.MainActivity">
         </activity>
 
-       <!-- <service
-            android:name=".dataBase.DBUpdateService"
-            android:exported="false"/>-->
-
         <activity android:name=".ui.achievements.AchievementsActivity">
         </activity>
         <activity android:name=".ui.statistics.StatisticsActivity">
