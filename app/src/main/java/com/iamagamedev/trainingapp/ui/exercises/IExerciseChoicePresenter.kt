@@ -11,7 +11,5 @@ interface IExerciseChoicePresenter : IGeneralPresenter {
 
     fun addToTraining()
 
-    fun getList()
-
     fun createExercise()
 }

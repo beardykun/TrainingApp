@@ -40,11 +40,6 @@ class ExerciseChoicePresenter(private val interactor: IExerciseChoiceInteractor 
         interactor.addToTraining(this)
     }
 
-    override fun getList() {
-        view?.showProgress()
-        interactor.getList(this)
-    }
-
     override fun getAdapterSuccess(adapter: ExercisesChoiceAdapter) {
         view?.hideProgress()
         view?.setAdapter(adapter)

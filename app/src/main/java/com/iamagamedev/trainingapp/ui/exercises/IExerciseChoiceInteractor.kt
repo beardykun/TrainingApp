@@ -16,6 +16,4 @@ interface IExerciseChoiceInteractor {
     fun addRemoveExercise(exerciseName: String, view: View, listener: OnExerciseChoiceListener)
 
     fun addToTraining(listener: OnExerciseChoiceListener)
-
-    fun getList(listener: OnExerciseChoiceListener)
 }

@@ -20,10 +20,7 @@ class ThisTrainingAdapter : RecyclerView.Adapter<ThisTrainingAdapter.ThisTrainin
     }
 
     override fun getItemCount(): Int {
-        return if (list == null)
-            0
-        else
-            list!!.size
+        return list?.size ?: 0
     }
 
     override fun onBindViewHolder(holder: ThisTrainingViewHolder, position: Int) {
@@ -33,6 +30,7 @@ class ThisTrainingAdapter : RecyclerView.Adapter<ThisTrainingAdapter.ThisTrainin
 
     fun swapAdapter(list: MutableList<String>) {
         this.list = list
+        notifyDataSetChanged()
     }
 
     class ThisTrainingViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

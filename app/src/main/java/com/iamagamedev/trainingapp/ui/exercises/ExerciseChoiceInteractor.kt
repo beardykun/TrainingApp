@@ -50,22 +50,4 @@ class ExerciseChoiceInteractor : IExerciseChoiceInteractor {
             }
         }
     }
-
-    override fun getList(listener: IExerciseChoiceInteractor.OnExerciseChoiceListener) {
-        val listEx = Utils.stringToList(MySharedPreferences.getString(Constants.SAVE_NEW_EXERCISE_LIST))
-        val exerciseList = ArrayList<ExerciseObject>()
-        val repository = ExerciseRepository(ThisApplication.instance)
-        doAsync {
-            val list = repository.getAllExercises()
-            uiThread {
-                for (i in list.value!!) {
-                    if (!listEx.contains(i.exerciseName)) {
-                        exerciseList.add(i)
-                    }
-                }
-                val adapter = ExercisesChoiceAdapter(exerciseList)
-                listener.getAdapterSuccess(adapter)
-            }
-        }
-    }
 }

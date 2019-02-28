@@ -11,9 +11,10 @@ import com.iamagamedev.trainingapp.dataBase.objects.ExerciseObject
 import org.jetbrains.anko.find
 import org.jetbrains.anko.imageResource
 
-class ExercisesChoiceAdapter(private val list: ArrayList<ExerciseObject>) :
+class ExercisesChoiceAdapter :
         RecyclerView.Adapter<ExercisesChoiceAdapter.ExercisesChoiceViewHolder>() {
 
+    private var list: List<ExerciseObject>? = null
     private var listener:OnExerciseChoiceItemListener? = null
     interface OnExerciseChoiceItemListener{
         fun onExerciseChoiceItemClick(trainingName: String, view: View)
@@ -30,20 +31,25 @@ class ExercisesChoiceAdapter(private val list: ArrayList<ExerciseObject>) :
     }
 
     override fun getItemCount(): Int {
-        return list.size
+        return list?.size ?: 0
+    }
+
+    fun swapAdapter(list: List<ExerciseObject>){
+        this.list = list
+        notifyDataSetChanged()
     }
 
     override fun onBindViewHolder(holder: ExercisesChoiceViewHolder, position: Int) {
-        if (list.isNotEmpty()) {
+        if (list!!.isNotEmpty()) {
             if (listener != null) {
                 holder.itemView.setOnClickListener {
 
-                    listener?.onExerciseChoiceItemClick(list[position].exerciseName, holder.itemView)
+                    listener?.onExerciseChoiceItemClick(list!![position].exerciseName, holder.itemView)
                 }
             }
 
-            holder.text.text = list[position].exerciseName
-            holder.image.imageResource = list[position].exerciseImage.toInt()
+            holder.text.text = list!![position].exerciseName
+            holder.image.imageResource = list!![position].exerciseImage.toInt()
         }else{
             holder.text.text = "No exercises"
         }
