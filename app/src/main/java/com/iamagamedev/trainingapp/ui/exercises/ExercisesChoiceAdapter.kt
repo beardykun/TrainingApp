@@ -15,12 +15,13 @@ class ExercisesChoiceAdapter :
         RecyclerView.Adapter<ExercisesChoiceAdapter.ExercisesChoiceViewHolder>() {
 
     private var list: List<ExerciseObject>? = null
-    private var listener:OnExerciseChoiceItemListener? = null
-    interface OnExerciseChoiceItemListener{
+    private var listener: OnExerciseChoiceItemListener? = null
+
+    interface OnExerciseChoiceItemListener {
         fun onExerciseChoiceItemClick(trainingName: String, view: View)
     }
 
-    fun setOnExerciseChoiceItemListener(listener: OnExerciseChoiceItemListener){
+    fun setOnExerciseChoiceItemListener(listener: OnExerciseChoiceItemListener) {
         this.listener = listener
     }
 
@@ -34,7 +35,7 @@ class ExercisesChoiceAdapter :
         return list?.size ?: 0
     }
 
-    fun swapAdapter(list: List<ExerciseObject>){
+    fun swapAdapter(list: List<ExerciseObject>) {
         this.list = list
         notifyDataSetChanged()
     }
@@ -50,7 +51,7 @@ class ExercisesChoiceAdapter :
 
             holder.text.text = list!![position].exerciseName
             holder.image.imageResource = list!![position].exerciseImage.toInt()
-        }else{
+        } else {
             holder.text.text = "No exercises"
         }
     }

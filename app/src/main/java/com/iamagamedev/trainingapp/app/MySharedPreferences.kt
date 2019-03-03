@@ -36,7 +36,7 @@ class MySharedPreferences {
         }
 
         fun getString(key: String): String{
-            return sharedPreferences.getString(key, "1")!!
+            return sharedPreferences.getString(key, "")!!
         }
 
         fun getList(listKey: String): MutableSet<String> {

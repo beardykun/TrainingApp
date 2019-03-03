@@ -2,6 +2,7 @@ package com.iamagamedev.trainingapp.ui.exercises
 
 import android.view.View
 import com.iamagamedev.trainingapp.dataBase.TrainingViewModel
+import com.iamagamedev.trainingapp.dataBase.objects.ExerciseObject
 import com.iamagamedev.trainingapp.ui.general.IGeneralPresenter
 
 interface IExerciseChoicePresenter : IGeneralPresenter {
@@ -13,4 +14,6 @@ interface IExerciseChoicePresenter : IGeneralPresenter {
     fun addToTraining(trainingViewModel: TrainingViewModel, exerciseChoiceActivity: ExerciseChoiceActivity)
 
     fun createExercise()
+
+    fun getList(exerciseList: List<ExerciseObject>): List<ExerciseObject>
 }

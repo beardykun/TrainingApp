@@ -6,6 +6,7 @@ import android.view.View
 import com.iamagamedev.trainingapp.app.Constants
 import com.iamagamedev.trainingapp.app.MySharedPreferences
 import com.iamagamedev.trainingapp.dataBase.TrainingViewModel
+import com.iamagamedev.trainingapp.dataBase.objects.ExerciseObject
 import com.iamagamedev.trainingapp.dataBase.objects.TrainingObject
 import com.iamagamedev.trainingapp.utils.Utils
 import org.jetbrains.anko.backgroundColor
@@ -26,12 +27,27 @@ class ExerciseChoiceInteractor : IExerciseChoiceInteractor {
         listener.onSuccessAddItem()
     }
 
-    override fun addToTraining(trainingViewModel: TrainingViewModel, exerciseChoiceActivity: ExerciseChoiceActivity, listener: IExerciseChoiceInteractor.OnExerciseChoiceListener) {
+    override fun getList(exerciseList: List<ExerciseObject>,
+                         listener: IExerciseChoiceInteractor.OnExerciseChoiceListener): List<ExerciseObject> {
+        val oldList = Utils.stringToList(MySharedPreferences.getString(Constants.SAVE_NEW_EXERCISE_LIST))
+        val newExList: MutableList<ExerciseObject> = mutableListOf()
+        for (i in exerciseList) {
+            if (oldList.contains(i.exerciseName)) {
+                newExList.add(i)
+            }
+        }
+        return newExList
+    }
+
+    override fun addToTraining(trainingViewModel: TrainingViewModel, exerciseChoiceActivity: ExerciseChoiceActivity,
+                               listener: IExerciseChoiceInteractor.OnExerciseChoiceListener) {
         val newExList: String = if (MySharedPreferences.isInside(Constants.SAVE_NEW_EXERCISE_LIST)) {
             val sb = StringBuilder()
-            sb.append(MySharedPreferences.getString(Constants.SAVE_NEW_EXERCISE_LIST))
-            sb.append(" , ")
-            sb.append(Utils.listToString(list))
+            if (MySharedPreferences.getString(Constants.SAVE_NEW_EXERCISE_LIST) != "") {
+                sb.append(MySharedPreferences.getString(Constants.SAVE_NEW_EXERCISE_LIST))
+                sb.append(" , ")
+                sb.append(Utils.listToString(list))
+            }
             sb.toString()
         } else {
             Utils.listToString(list)

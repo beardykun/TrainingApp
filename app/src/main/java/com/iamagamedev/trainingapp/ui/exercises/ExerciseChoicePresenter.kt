@@ -2,6 +2,7 @@ package com.iamagamedev.trainingapp.ui.exercises
 
 import android.view.View
 import com.iamagamedev.trainingapp.dataBase.TrainingViewModel
+import com.iamagamedev.trainingapp.dataBase.objects.ExerciseObject
 import com.iamagamedev.trainingapp.ui.createNewExercise.CreateNewExerciseActivity
 import com.iamagamedev.trainingapp.ui.thisTraining.ThisTrainingActivity
 
@@ -39,6 +40,11 @@ class ExerciseChoicePresenter(private val interactor: IExerciseChoiceInteractor 
     override fun addToTraining(trainingViewModel: TrainingViewModel, exerciseChoiceActivity: ExerciseChoiceActivity) {
         view?.showProgress()
         interactor.addToTraining(trainingViewModel, exerciseChoiceActivity, this)
+    }
+
+    override fun getList(exerciseList: List<ExerciseObject>): List<ExerciseObject> {
+        view?.showProgress()
+        return interactor.getList(exerciseList, this)
     }
 
     override fun onSuccessAddItem() {

@@ -66,7 +66,7 @@ class ExerciseChoiceActivity : IExerciseChoiceView,
     private fun setAdapter() {
         val adapter = ExercisesChoiceAdapter()
         exerciseViewModel?.getAllExercises()?.observe(this, Observer<List<ExerciseObject>> { exerciseList ->
-            adapter.swapAdapter(exerciseList!!)
+            adapter.swapAdapter(presenter!!.getList(exerciseList!!))
         })
         adapter.setOnExerciseChoiceItemListener(this)
         exerciseChoiceRecyclerView.adapter = adapter
