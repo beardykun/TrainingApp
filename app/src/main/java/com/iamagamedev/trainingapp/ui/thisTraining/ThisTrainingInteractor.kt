@@ -1,19 +1,12 @@
 package com.iamagamedev.trainingapp.ui.thisTraining
 
-import android.content.Intent
+
 import com.iamagamedev.trainingapp.app.Constants
 import com.iamagamedev.trainingapp.app.MySharedPreferences
-import com.iamagamedev.trainingapp.app.ThisApplication
 import com.iamagamedev.trainingapp.dataBase.objects.TrainingObject
-import com.iamagamedev.trainingapp.ui.exercises.ExerciseChoiceActivity
 import com.iamagamedev.trainingapp.utils.Utils
 
 class ThisTrainingInteractor : IThisTrainingInteractor {
-
-    override fun addExercise() {
-        ThisApplication.instance.startActivity(Intent(ThisApplication.instance,
-                ExerciseChoiceActivity::class.java))
-    }
 
     override fun getAdapter(training: TrainingObject, listener: IThisTrainingInteractor.OnThisTrainingListener) {
         try {

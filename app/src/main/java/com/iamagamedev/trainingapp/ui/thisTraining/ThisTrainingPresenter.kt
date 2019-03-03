@@ -1,6 +1,5 @@
 package com.iamagamedev.trainingapp.ui.thisTraining
 
-import com.iamagamedev.trainingapp.dataBase.TrainingViewModel
 import com.iamagamedev.trainingapp.dataBase.objects.TrainingObject
 
 class ThisTrainingPresenter(private val interactor: IThisTrainingInteractor = ThisTrainingInteractor())
@@ -14,10 +13,6 @@ class ThisTrainingPresenter(private val interactor: IThisTrainingInteractor = Th
 
     override fun onDetachView() {
         this.view = null
-    }
-
-    override fun addExercise() {
-        interactor.addExercise()
     }
 
     override fun onSuccess() {

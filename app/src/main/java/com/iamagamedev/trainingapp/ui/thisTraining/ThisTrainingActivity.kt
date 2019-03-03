@@ -8,6 +8,7 @@ import com.iamagamedev.trainingapp.app.Constants
 import com.iamagamedev.trainingapp.app.MySharedPreferences
 import com.iamagamedev.trainingapp.dataBase.TrainingViewModel
 import com.iamagamedev.trainingapp.dataBase.objects.TrainingObject
+import com.iamagamedev.trainingapp.ui.exercises.ExerciseChoiceActivity
 import com.iamagamedev.trainingapp.ui.general.GeneralActivityWithAppBar
 import kotlinx.android.synthetic.main.activity_this_training.*
 
@@ -31,7 +32,7 @@ class ThisTrainingActivity : GeneralActivityWithAppBar(), IThisTrainingView {
                 ?.observe(this, Observer<TrainingObject> { training ->
                     presenter?.getAdapter(training!!)
                 })
-        fabThisTraining.setOnClickListener { presenter?.addExercise() }
+        fabThisTraining.setOnClickListener { startActivity(ExerciseChoiceActivity::class.java) }
     }
 
     override fun onStop() {

@@ -7,7 +7,5 @@ interface IThisTrainingPresenter: IGeneralPresenter {
 
     fun onAttachView(view: IThisTrainingView)
 
-    fun addExercise()
-
     fun getAdapter(training: TrainingObject)
 }
