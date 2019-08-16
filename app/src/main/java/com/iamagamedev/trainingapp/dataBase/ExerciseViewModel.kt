@@ -1,19 +1,17 @@
 package com.iamagamedev.trainingapp.dataBase
 
 import android.app.Application
-import android.arch.lifecycle.AndroidViewModel
-import android.arch.lifecycle.LiveData
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import com.iamagamedev.trainingapp.dataBase.objects.ExerciseObject
 import com.iamagamedev.trainingapp.dataBase.repositories.ExerciseRepository
 
 class ExerciseViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val exerciseRepository = ExerciseRepository(application)
-
-    private val exerciseList: LiveData<List<ExerciseObject>> = exerciseRepository.getAllExercises()
+    private val exerciseRepository:ExerciseRepository = ExerciseRepository(TrainingDatabase.getDatabase(application)!!.exerciseDao())
 
     fun getAllExercises(): LiveData<List<ExerciseObject>> {
-        return exerciseList
+        return exerciseRepository.getAllExercises()
     }
 
     fun getExerciseWithName(name: String): LiveData<ExerciseObject> {

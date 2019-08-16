@@ -1,11 +1,11 @@
 package com.iamagamedev.trainingapp.ui.exercises
 
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import com.iamagamedev.trainingapp.R
 import com.iamagamedev.trainingapp.dataBase.objects.ExerciseObject
 import org.jetbrains.anko.find

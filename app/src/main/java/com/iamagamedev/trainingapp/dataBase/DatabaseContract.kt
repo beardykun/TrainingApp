@@ -12,7 +12,7 @@ class DatabaseContract {
         companion object {
             const val TRAINING_NAME = "trainingName"
             const val TRAINING_DATE = "trainingDate"
-            const val TRAINING_EXERCISE_NAME = "trainingExerciseName"
+            const val TRAINING_EXERCISE_NAME = "trainingExerciseNameList"
             const val TRAINING_EXERCISE_REPETITIONS = "trainingExerciseRepetitions"
             const val TRAINING_TIME_BETWEEN_SETS = "trainingTimeBetweenSets"
             const val TRAINING_TOTAL_TIME = "trainingTotalTime"

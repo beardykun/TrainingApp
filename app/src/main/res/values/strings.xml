@@ -20,6 +20,10 @@
     <string name="back">Back</string>
     <string name="abs">Abs</string>
     <string name="create">Create</string>
+    <string name="exercise_choise_error">You should choose at least one exercise for this training or press back button to go to previous screen</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

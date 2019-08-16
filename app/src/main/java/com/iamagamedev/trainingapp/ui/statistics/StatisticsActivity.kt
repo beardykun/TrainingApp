@@ -1,7 +1,7 @@
 package com.iamagamedev.trainingapp.ui.statistics
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.iamagamedev.trainingapp.R
 
 class StatisticsActivity : AppCompatActivity() {

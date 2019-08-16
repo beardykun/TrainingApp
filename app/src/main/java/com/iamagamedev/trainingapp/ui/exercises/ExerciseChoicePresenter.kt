@@ -26,10 +26,12 @@ class ExerciseChoicePresenter(private val interactor: IExerciseChoiceInteractor 
 
     override fun onError(error: String, code: Int) {
         view?.hideProgress()
+        view?.showError(error, code)
     }
 
     override fun onError(error: Int, code: Int) {
         view?.hideProgress()
+        view?.showError(error, code)
     }
 
     override fun addRemoveExercise(exerciseName: String, view: View) {
@@ -43,7 +45,6 @@ class ExerciseChoicePresenter(private val interactor: IExerciseChoiceInteractor 
     }
 
     override fun getList(exerciseList: List<ExerciseObject>): List<ExerciseObject> {
-        view?.showProgress()
         return interactor.getList(exerciseList, this)
     }
 

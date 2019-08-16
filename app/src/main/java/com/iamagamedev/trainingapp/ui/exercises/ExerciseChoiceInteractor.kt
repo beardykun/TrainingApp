@@ -1,10 +1,13 @@
 package com.iamagamedev.trainingapp.ui.exercises
 
-import android.arch.lifecycle.Observer
+
 import android.graphics.Color
 import android.view.View
+import androidx.lifecycle.Observer
+import com.iamagamedev.trainingapp.R
 import com.iamagamedev.trainingapp.app.Constants
 import com.iamagamedev.trainingapp.app.MySharedPreferences
+import com.iamagamedev.trainingapp.app.ThisApplication
 import com.iamagamedev.trainingapp.dataBase.TrainingViewModel
 import com.iamagamedev.trainingapp.dataBase.objects.ExerciseObject
 import com.iamagamedev.trainingapp.dataBase.objects.TrainingObject
@@ -29,10 +32,10 @@ class ExerciseChoiceInteractor : IExerciseChoiceInteractor {
 
     override fun getList(exerciseList: List<ExerciseObject>,
                          listener: IExerciseChoiceInteractor.OnExerciseChoiceListener): List<ExerciseObject> {
-        val oldList = Utils.stringToList(MySharedPreferences.getString(Constants.SAVE_NEW_EXERCISE_LIST))
+        val oldList = Utils.stringToList(MySharedPreferences.getString(Utils.getCurrentTrainingList()))
         val newExList: MutableList<ExerciseObject> = mutableListOf()
         for (i in exerciseList) {
-            if (oldList.contains(i.exerciseName)) {
+            if (!oldList.contains(i.exerciseName)) {
                 newExList.add(i)
             }
         }
@@ -41,22 +44,26 @@ class ExerciseChoiceInteractor : IExerciseChoiceInteractor {
 
     override fun addToTraining(trainingViewModel: TrainingViewModel, exerciseChoiceActivity: ExerciseChoiceActivity,
                                listener: IExerciseChoiceInteractor.OnExerciseChoiceListener) {
-        val newExList: String = if (MySharedPreferences.isInside(Constants.SAVE_NEW_EXERCISE_LIST)) {
+        //FIXME refactor, trainingViewModel should not be here
+        val newExList: String = if (MySharedPreferences.isInside(Utils.getCurrentTrainingList())) {
             val sb = StringBuilder()
-            if (MySharedPreferences.getString(Constants.SAVE_NEW_EXERCISE_LIST) != "") {
-                sb.append(MySharedPreferences.getString(Constants.SAVE_NEW_EXERCISE_LIST))
-                sb.append(" , ")
-                sb.append(Utils.listToString(list))
+            if (list.size == 0 || list.contains(Constants.EMPTY_STRING)) {
+                listener.onError(ThisApplication.instance.getString(R.string.exercise_choise_error), 11)
+                return
             }
+            sb.append(MySharedPreferences.getString(Utils.getCurrentTrainingList()))
+            sb.append(" , ")
+            sb.append(Utils.listToString(list))
             sb.toString()
         } else {
             Utils.listToString(list)
         }
 
-        trainingViewModel.getTraining(MySharedPreferences.getString(Constants.SAVE_TRAINING_NAME)).observe(exerciseChoiceActivity,
+        trainingViewModel.getTraining(MySharedPreferences.getString(Constants.SAVE_TRAINING_NAME))
+                .observe(exerciseChoiceActivity,
                 Observer<TrainingObject> { training ->
-                    training?.trainingExerciseName = newExList
-                    trainingViewModel.updateTraining(training!!)
+                    training?.trainingExerciseNameList = newExList
+                    training?.let { trainingViewModel.updateTraining(it) }
                 })
         listener.onSuccess()
     }

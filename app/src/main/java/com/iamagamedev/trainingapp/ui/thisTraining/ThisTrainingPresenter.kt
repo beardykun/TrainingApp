@@ -38,4 +38,10 @@ class ThisTrainingPresenter(private val interactor: IThisTrainingInteractor = Th
         view?.hideProgress()
         view?.setAdapter(adapter)
     }
+
+    override fun goToExerciseChoice() {
+        view?.hideProgress()
+        view?.goToExerciseChoice()
+    }
+
 }

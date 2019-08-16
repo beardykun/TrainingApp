@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context=".ui.training.TrainingActivity">
+
+<androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/trainingRecyclerView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.training.TrainingActivity">
+    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/trainingRecyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layoutManager="android.support.v7.widget.LinearLayoutManager"/>
+<com.google.android.material.floatingactionbutton.FloatingActionButton
+    android:id="@+id/addTrainingBtn"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/dp32"
+    android:src="@drawable/ic_playlist_add_black_24dp"
+    app:elevation="@dimen/dp16"
+    app:fabSize="normal"
+    app:layout_anchor="@id/trainingRecyclerView"
+    app:layout_anchorGravity="bottom|end" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/addTrainingBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_playlist_add_black_24dp"
-        android:layout_margin="@dimen/dp32"
-        app:elevation="@dimen/dp16"
-        app:fabSize="normal"
-        app:layout_anchor="@id/trainingRecyclerView"
-        app:layout_anchorGravity="bottom|end"/>
-
-</android.support.design.widget.CoordinatorLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,9 +1,9 @@
 package com.iamagamedev.trainingapp.dataBase
 
-import android.arch.persistence.room.Database
-import android.arch.persistence.room.Room
-import android.arch.persistence.room.RoomDatabase
 import android.content.Context
+import androidx.room.Database
+import androidx.room.Room
+import androidx.room.RoomDatabase
 import com.iamagamedev.trainingapp.dataBase.dao.ExerciseDao
 import com.iamagamedev.trainingapp.dataBase.dao.TrainingDao
 import com.iamagamedev.trainingapp.dataBase.objects.ExerciseObject

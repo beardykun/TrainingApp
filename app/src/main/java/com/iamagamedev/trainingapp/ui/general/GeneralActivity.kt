@@ -1,14 +1,14 @@
 package com.iamagamedev.trainingapp.ui.general
 
 import android.content.Intent
-import android.support.design.widget.CoordinatorLayout
-import android.support.design.widget.Snackbar
-import android.support.v4.content.ContextCompat
-import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.core.content.ContextCompat
+import com.google.android.material.snackbar.Snackbar
 import com.iamagamedev.trainingapp.R
 import kotlinx.android.synthetic.main.activity_general.*
 import org.jetbrains.anko.find
@@ -37,7 +37,7 @@ abstract class GeneralActivity : AppCompatActivity() {
         snackbar.setActionTextColor(ContextCompat.getColor(this, R.color.black))
 
         val sbView = snackbar.view
-        val textView = sbView.find<TextView>(android.support.design.R.id.snackbar_text)
+        val textView = sbView.find<TextView>(com.google.android.material.R.id.snackbar_action)
         textView.setTextColor(ContextCompat.getColor(this, R.color.black))
         textView.maxLines = 10
         snackbar.show()

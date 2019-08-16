@@ -1,6 +1,5 @@
 package com.iamagamedev.trainingapp.ui.training
 
-import com.iamagamedev.trainingapp.dataBase.TrainingViewModel
 import com.iamagamedev.trainingapp.dataBase.objects.TrainingObject
 
 class TrainingPresenter(private val interactor: ITrainingInteractor = TrainingInteractor())
@@ -16,16 +15,11 @@ class TrainingPresenter(private val interactor: ITrainingInteractor = TrainingIn
         this.view = null
     }
 
-    override fun updateSet(viewModel: TrainingViewModel, newItem: String) {
-        view?.showProgress()
-        interactor.updateSet(viewModel, newItem, this)
-    }
-
     override fun onSuccess() {
         view?.hideProgress()
     }
 
-    override fun onDeleteSuccess() {
+    override fun onDeleteSuccess(training: TrainingObject) {
         view?.hideProgress()
     }
 
@@ -39,9 +33,9 @@ class TrainingPresenter(private val interactor: ITrainingInteractor = TrainingIn
         view?.showError(error, code)
     }
 
-    override fun deleteTraining(name: String) {
+    override fun deleteTraining(training: TrainingObject) {
         view?.showProgress()
-        interactor.deleteTraining(name, this)
+        interactor.deleteTraining(training, this)
     }
 
     override fun startTraining() {

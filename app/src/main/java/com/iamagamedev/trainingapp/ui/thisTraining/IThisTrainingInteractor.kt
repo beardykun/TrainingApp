@@ -9,6 +9,7 @@ interface IThisTrainingInteractor {
         fun onSuccess()
 
         fun getAdapterSuccess(adapter: ThisTrainingAdapter)
+        fun goToExerciseChoice()
     }
 
     fun getAdapter(training: TrainingObject, listener: OnThisTrainingListener)

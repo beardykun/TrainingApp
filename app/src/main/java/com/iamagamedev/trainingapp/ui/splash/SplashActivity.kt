@@ -1,9 +1,13 @@
 package com.iamagamedev.trainingapp.ui.splash
 
 import android.os.Bundle
+import android.util.Log
+import com.amitshekhar.DebugDB
 import com.iamagamedev.trainingapp.R
 import com.iamagamedev.trainingapp.ui.general.GeneralActivity
 import com.iamagamedev.trainingapp.ui.main.MainActivity
+import java.util.*
+import kotlin.concurrent.schedule
 
 class SplashActivity : GeneralActivity(), ISplashView {
 
@@ -17,6 +21,7 @@ class SplashActivity : GeneralActivity(), ISplashView {
     }
 
     override fun onStart() {
+        Log.i("Tagger", DebugDB.getAddressLog())
         super.onStart()
         presenter?.onAttachView(this)
         presenter?.loadDB()
@@ -44,6 +49,8 @@ class SplashActivity : GeneralActivity(), ISplashView {
     }
 
     override fun startApp() {
-        startActivity(MainActivity::class.java, true)
+        Timer().schedule(3000){
+            startActivity(MainActivity::class.java, true)
+        }
     }
 }

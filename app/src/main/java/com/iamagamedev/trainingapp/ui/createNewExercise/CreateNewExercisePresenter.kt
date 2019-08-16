@@ -19,26 +19,23 @@ class CreateNewExercisePresenter(private val interactor: ICreateNewExerciseInter
         view?.hideProgress()
     }
 
+    override fun onSuccessDBInsert() {
+        view?.hideProgress()
+        view?.onSuccessDBInsert()
+    }
+
     override fun onError(error: String, code: Int) {
         view?.hideProgress()
+        view?.showError(error, code)
     }
 
     override fun onError(error: Int, code: Int) {
         view?.hideProgress()
+        view?.showError(error, code)
     }
 
-    override fun addExerciseToDb() {
+    override fun addExerciseToDb(exerciseObject: ExerciseObject?, exName: String, exGroupName: String, exImageId: Int) {
         view?.showProgress()
-        interactor.addValidateFields(this)
-    }
-
-    override fun addExerciseGroupAndImage(position: Int, muscleGroup: String) {
-        view?.showProgress()
-        interactor.addExerciseGroupAndImage(position, muscleGroup, this)
-    }
-
-    override fun addExerciseName(name: String) {
-        view?.showProgress()
-        interactor.addExerciseName(name, this)
+        interactor.addExerciseToDb(exerciseObject, exName, exGroupName, exImageId, this)
     }
 }

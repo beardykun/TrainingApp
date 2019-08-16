@@ -1,22 +1,13 @@
 package com.iamagamedev.trainingapp.dataBase.repositories
 
-import android.app.Application
-import android.arch.lifecycle.LiveData
-import com.iamagamedev.trainingapp.dataBase.TrainingDatabase
+import androidx.lifecycle.LiveData
 import com.iamagamedev.trainingapp.dataBase.dao.ExerciseDao
 import com.iamagamedev.trainingapp.dataBase.objects.ExerciseObject
 import org.jetbrains.anko.doAsync
 
-class ExerciseRepository(application: Application) {
+class ExerciseRepository(private val exerciseDao: ExerciseDao) {
 
-    private val exerciseDao: ExerciseDao
-
-    init {
-        val db = TrainingDatabase.getDatabase(application)
-        exerciseDao = db!!.exerciseDao()
-    }
-
-    fun getAllExercises():LiveData<List<ExerciseObject>>{
+    fun getAllExercises(): LiveData<List<ExerciseObject>> {
         return exerciseDao.getAllExercises()
     }
 

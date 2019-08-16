@@ -1,11 +1,11 @@
 package com.iamagamedev.trainingapp.ui.createNewExercise
 
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import com.iamagamedev.trainingapp.R
 import com.iamagamedev.trainingapp.app.ThisApplication
 import org.jetbrains.anko.find
@@ -18,7 +18,7 @@ class CreateNewExerciseAdapter : RecyclerView.Adapter<CreateNewExerciseAdapter.C
             R.drawable.ic_fitness_center_black_24dp, R.drawable.ic_fitness_center_black_24dp, R.drawable.ic_fitness_center_black_24dp, R.drawable.ic_fitness_center_black_24dp)
 
     interface OnCreateNewExerciseListener{
-        fun chooseMuscleGroup(position: Int, muscleGroup: String)
+        fun chooseMuscleGroup(imageId: Int, muscleGroup: String)
     }
 
     private var listener:OnCreateNewExerciseListener? = null

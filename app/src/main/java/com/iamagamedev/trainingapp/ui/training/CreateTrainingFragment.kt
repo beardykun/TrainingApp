@@ -1,7 +1,6 @@
 package com.iamagamedev.trainingapp.ui.training
 
 import android.os.Bundle
-import android.support.v4.app.DialogFragment
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +8,7 @@ import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.TextView
+import androidx.fragment.app.DialogFragment
 import com.iamagamedev.trainingapp.R
 import org.jetbrains.anko.find
 

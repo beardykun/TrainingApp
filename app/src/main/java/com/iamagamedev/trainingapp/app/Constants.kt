@@ -17,5 +17,6 @@ class Constants {
         const val SAVE_NEW_EXERCISE_LIST = "SAVE_NEW_EXERCISE_LIST"
 
         const val SAVE_START_TIME = "SAVE_START_TIME"
+        const val EMPTY_STRING = "EMPTY_STRING"
     }
 }
