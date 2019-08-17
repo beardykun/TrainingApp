@@ -1,8 +1,8 @@
-package com.iamagamedev.trainingapp.ui.exercises
+package com.iamagamedev.trainingapp.ui.thisTraining.fragments.exerciseChoice
 
 import com.iamagamedev.trainingapp.ui.general.IGeneralView
 
 interface IExerciseChoiceView : IGeneralView {
 
-    fun startActivityTwo(activity: Class<*>)
+
 }

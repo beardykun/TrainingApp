@@ -1,4 +1,4 @@
-package com.iamagamedev.trainingapp.ui.thisTraining
+package com.iamagamedev.trainingapp.ui.thisTraining.fragments.thisTraining
 
 import com.iamagamedev.trainingapp.dataBase.objects.TrainingObject
 import com.iamagamedev.trainingapp.ui.general.IGeneralPresenter

@@ -1,7 +1,6 @@
-package com.iamagamedev.trainingapp.ui.thisTraining
+package com.iamagamedev.trainingapp.ui.thisTraining.fragments.thisTraining
 
 
-import com.iamagamedev.trainingapp.app.Constants
 import com.iamagamedev.trainingapp.app.MySharedPreferences
 import com.iamagamedev.trainingapp.dataBase.objects.TrainingObject
 import com.iamagamedev.trainingapp.utils.Utils
@@ -11,10 +10,10 @@ class ThisTrainingInteractor : IThisTrainingInteractor {
     override fun getAdapter(training: TrainingObject, listener: IThisTrainingInteractor.OnThisTrainingListener) {
         try {
             val list = Utils.stringToList(training.trainingExerciseNameList)
-            if (list.contains(Constants.EMPTY_STRING)) {
-                listener.goToExerciseChoice()
+            /*if (list.contains(Constants.EMPTY_STRING)) {
+
                 return
-            }
+            }*/
                 val adapter = ThisTrainingAdapter()
                 adapter.swapAdapter(list)
                 MySharedPreferences.saveString(

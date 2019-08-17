@@ -1,4 +1,4 @@
-package com.iamagamedev.trainingapp.ui.thisTraining
+package com.iamagamedev.trainingapp.ui.thisTraining.fragments.thisTraining
 
 import com.iamagamedev.trainingapp.dataBase.objects.TrainingObject
 
@@ -38,10 +38,4 @@ class ThisTrainingPresenter(private val interactor: IThisTrainingInteractor = Th
         view?.hideProgress()
         view?.setAdapter(adapter)
     }
-
-    override fun goToExerciseChoice() {
-        view?.hideProgress()
-        view?.goToExerciseChoice()
-    }
-
 }

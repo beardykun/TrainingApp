@@ -9,7 +9,7 @@ import com.iamagamedev.trainingapp.app.MySharedPreferences
 import com.iamagamedev.trainingapp.dataBase.TrainingViewModel
 import com.iamagamedev.trainingapp.dataBase.objects.TrainingObject
 import com.iamagamedev.trainingapp.ui.general.GeneralActivityWithAppBar
-import com.iamagamedev.trainingapp.ui.thisTraining.ThisTrainingActivity
+import com.iamagamedev.trainingapp.ui.thisTraining.fragments.ThisTrainingActivity
 import kotlinx.android.synthetic.main.activity_training.*
 import kotlinx.android.synthetic.main.toolbar.*
 import org.jetbrains.anko.alert

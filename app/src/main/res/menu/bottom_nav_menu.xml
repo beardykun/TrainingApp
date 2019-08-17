@@ -4,12 +4,14 @@
 
     <item
         android:id="@+id/fragment_this_training"
-        android:title="Home"
+        android:icon="@drawable/ic_fitness_center_black_24dp"
+        android:title="This Training"
         tools:ignore="HardcodedText" />
 
     <item
         android:id="@+id/fragment_training_choice"
-        android:title="Dashboard"
+        android:icon="@drawable/ic_fitness_center_black_24dp"
+        android:title="Exercise Choice"
         tools:ignore="HardcodedText" />
 
 </menu>

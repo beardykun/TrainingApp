@@ -1,5 +1,6 @@
-package com.iamagamedev.trainingapp.ui.exercises
+package com.iamagamedev.trainingapp.ui.thisTraining.fragments.exerciseChoice
 
+import android.content.Context
 import android.view.View
 import com.iamagamedev.trainingapp.dataBase.TrainingViewModel
 import com.iamagamedev.trainingapp.dataBase.objects.ExerciseObject
@@ -11,9 +12,7 @@ interface IExerciseChoicePresenter : IGeneralPresenter {
 
     fun addRemoveExercise(exerciseName: String, view: View)
 
-    fun addToTraining(trainingViewModel: TrainingViewModel, exerciseChoiceActivity: ExerciseChoiceActivity)
-
-    fun createExercise()
+    fun addToTraining(trainingViewModel: TrainingViewModel, context: Context)
 
     fun getList(exerciseList: List<ExerciseObject>): List<ExerciseObject>
 }

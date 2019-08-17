@@ -5,7 +5,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
 xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
-tools:context=".ui.thisTraining.ThisTrainingActivity">
+tools:context=".ui.thisTraining.fragments.ThisTrainingActivity">
 
 
 <androidx.recyclerview.widget.RecyclerView
@@ -13,16 +13,5 @@ tools:context=".ui.thisTraining.ThisTrainingActivity">
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
-
-<com.google.android.material.floatingactionbutton.FloatingActionButton
-    android:id="@+id/fabThisTraining"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_margin="@dimen/dp32"
-    android:src="@drawable/ic_playlist_add_black_24dp"
-    app:elevation="@dimen/dp16"
-    app:fabSize="normal"
-    app:layout_anchor="@id/recyclerViewThisTraining"
-    app:layout_anchorGravity="end|bottom"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

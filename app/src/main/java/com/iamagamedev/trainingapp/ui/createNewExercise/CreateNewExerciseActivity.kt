@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModelProviders
 import com.iamagamedev.trainingapp.R
 import com.iamagamedev.trainingapp.dataBase.ExerciseViewModel
 import com.iamagamedev.trainingapp.dataBase.objects.ExerciseObject
-import com.iamagamedev.trainingapp.ui.exercises.ExerciseChoiceActivity
 import com.iamagamedev.trainingapp.ui.general.GeneralActivityWithAppBar
 import kotlinx.android.synthetic.main.activity_create_new_exercise.*
 import kotlinx.android.synthetic.main.toolbar.*
@@ -68,9 +67,5 @@ class CreateNewExerciseActivity : GeneralActivityWithAppBar(), ICreateNewExercis
     override fun chooseMuscleGroup(imageId: Int, muscleGroup: String) {
         exImageId = imageId
         exGroupName = muscleGroup
-    }
-
-    override fun onSuccessDBInsert() {
-        startActivity(ExerciseChoiceActivity::class.java)
     }
 }

@@ -1,4 +1,4 @@
-package com.iamagamedev.trainingapp.ui.exercises
+package com.iamagamedev.trainingapp.ui.thisTraining.fragments.exerciseChoice
 
 import android.view.LayoutInflater
 import android.view.View

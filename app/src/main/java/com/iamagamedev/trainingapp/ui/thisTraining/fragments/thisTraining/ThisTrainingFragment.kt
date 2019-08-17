@@ -1,7 +1,6 @@
-package com.iamagamedev.trainingapp.ui.thisTraining.fragments
+package com.iamagamedev.trainingapp.ui.thisTraining.fragments.thisTraining
 
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,15 +11,8 @@ import com.iamagamedev.trainingapp.R
 import com.iamagamedev.trainingapp.app.Constants
 import com.iamagamedev.trainingapp.app.MySharedPreferences
 import com.iamagamedev.trainingapp.dataBase.objects.TrainingObject
-import com.iamagamedev.trainingapp.ui.exercises.ExerciseChoiceActivity
-import com.iamagamedev.trainingapp.ui.thisTraining.*
-import com.iamagamedev.trainingapp.ui.training.*
-import com.iamagamedev.trainingapp.utils.Utils
+import com.iamagamedev.trainingapp.ui.thisTraining.fragments.ThisTrainingActivity
 import kotlinx.android.synthetic.main.fragment_this_training.*
-import kotlinx.android.synthetic.main.toolbar.*
-import org.jetbrains.anko.alert
-import org.jetbrains.anko.noButton
-import org.jetbrains.anko.yesButton
 
 class ThisTrainingFragment : Fragment(), IThisTrainingView {
 
@@ -44,7 +36,6 @@ class ThisTrainingFragment : Fragment(), IThisTrainingView {
                 ?.observe(this, Observer<TrainingObject> { training ->
                     presenter?.getAdapter(training!!)
                 })
-        fabThisTraining.setOnClickListener { startActivity(Intent(activity, ExerciseChoiceActivity::class.java)) }
     }
 
     override fun onStop() {
@@ -54,13 +45,6 @@ class ThisTrainingFragment : Fragment(), IThisTrainingView {
 
     override fun setAdapter(adapter: ThisTrainingAdapter) {
         recyclerViewThisTraining.adapter = adapter
-    }
-
-    override fun goToExerciseChoice() {
-        MySharedPreferences.saveString(
-                MySharedPreferences.getString(Constants.SAVE_TRAINING_NAME),
-                Utils.listToString(mutableListOf(Constants.EMPTY_STRING)))
-        startActivity(Intent(activity, ExerciseChoiceActivity::class.java))
     }
 
     override fun showProgress() {

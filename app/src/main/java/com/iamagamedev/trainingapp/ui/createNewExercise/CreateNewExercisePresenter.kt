@@ -21,7 +21,6 @@ class CreateNewExercisePresenter(private val interactor: ICreateNewExerciseInter
 
     override fun onSuccessDBInsert() {
         view?.hideProgress()
-        view?.onSuccessDBInsert()
     }
 
     override fun onError(error: String, code: Int) {

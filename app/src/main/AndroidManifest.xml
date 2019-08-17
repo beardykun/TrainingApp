@@ -15,8 +15,8 @@
         <activity android:name=".ui.main.MainActivity">
         </activity>
         <activity
-            android:name=".ui.exercises.ExerciseChoiceActivity"
-            android:parentActivityName=".ui.thisTraining.ThisTrainingActivity">
+            android:name=".ui.thisTraining.fragments.exerciseChoice.ExerciseChoiceActivity"
+            android:parentActivityName=".ui.thisTraining.fragments.ThisTrainingActivity">
         </activity>
 
         <activity
@@ -40,11 +40,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.thisTraining.ThisTrainingActivity"
+            android:name=".ui.thisTraining.fragments.ThisTrainingActivity"
             android:parentActivityName=".ui.training.TrainingActivity">
         </activity>
         <activity android:name=".ui.createNewExercise.CreateNewExerciseActivity"
-            android:parentActivityName=".ui.exercises.ExerciseChoiceActivity">
+            android:parentActivityName=".ui.thisTraining.fragments.exerciseChoice.ExerciseChoiceActivity">
         </activity>
     </application>
 

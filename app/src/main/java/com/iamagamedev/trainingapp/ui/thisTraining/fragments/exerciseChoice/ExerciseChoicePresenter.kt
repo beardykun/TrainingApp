@@ -1,10 +1,11 @@
-package com.iamagamedev.trainingapp.ui.exercises
+package com.iamagamedev.trainingapp.ui.thisTraining.fragments.exerciseChoice
 
+import android.content.Context
 import android.view.View
 import com.iamagamedev.trainingapp.dataBase.TrainingViewModel
 import com.iamagamedev.trainingapp.dataBase.objects.ExerciseObject
 import com.iamagamedev.trainingapp.ui.createNewExercise.CreateNewExerciseActivity
-import com.iamagamedev.trainingapp.ui.thisTraining.ThisTrainingActivity
+import com.iamagamedev.trainingapp.ui.thisTraining.fragments.ThisTrainingActivity
 
 class ExerciseChoicePresenter(private val interactor: IExerciseChoiceInteractor = ExerciseChoiceInteractor()) :
         IExerciseChoicePresenter, IExerciseChoiceInteractor.OnExerciseChoiceListener {
@@ -21,7 +22,6 @@ class ExerciseChoicePresenter(private val interactor: IExerciseChoiceInteractor 
 
     override fun onSuccess() {
         view?.hideProgress()
-        view?.startActivityTwo(ThisTrainingActivity::class.java)
     }
 
     override fun onError(error: String, code: Int) {
@@ -39,9 +39,9 @@ class ExerciseChoicePresenter(private val interactor: IExerciseChoiceInteractor 
         interactor.addRemoveExercise(exerciseName, view, this)
     }
 
-    override fun addToTraining(trainingViewModel: TrainingViewModel, exerciseChoiceActivity: ExerciseChoiceActivity) {
+    override fun addToTraining(trainingViewModel: TrainingViewModel, context: Context) {
         view?.showProgress()
-        interactor.addToTraining(trainingViewModel, exerciseChoiceActivity, this)
+        interactor.addToTraining(trainingViewModel, context, this)
     }
 
     override fun getList(exerciseList: List<ExerciseObject>): List<ExerciseObject> {
@@ -50,9 +50,5 @@ class ExerciseChoicePresenter(private val interactor: IExerciseChoiceInteractor 
 
     override fun onSuccessAddItem() {
         view?.hideProgress()
-    }
-
-    override fun createExercise() {
-        view?.startActivityTwo(CreateNewExerciseActivity::class.java)
     }
 }

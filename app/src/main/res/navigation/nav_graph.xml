@@ -8,13 +8,13 @@
     <fragment
         android:id="@+id/fragment_this_training"
         android:label="FragmentThisTraining"
-        android:name="com.iamagamedev.trainingapp.ui.thisTraining.fragments.ThisTrainingFragment"
+        android:name="com.iamagamedev.trainingapp.ui.thisTraining.fragments.thisTraining.ThisTrainingFragment"
         tools:layout="@layout/fragment_this_training" />
 
     <fragment
         android:id="@+id/fragment_training_choice"
         android:label="FragmentTrainingChoice"
-        android:name="com.iamagamedev.trainingapp.ui.thisTraining.fragments.ExerciseChoiceFragment"
+        android:name="com.iamagamedev.trainingapp.ui.thisTraining.fragments.exerciseChoice.ExerciseChoiceFragment"
         tools:layout="@layout/fragment_this_training" />
 
 </navigation>
