@@ -7,11 +7,10 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.iamagamedev.trainingapp.R
 import com.iamagamedev.trainingapp.ui.general.GeneralActivityWithAppBar
-import com.iamagamedev.trainingapp.ui.thisTraining.fragments.thisTraining.IThisTrainingView
 import kotlinx.android.synthetic.main.activity_this_training.*
 import kotlinx.android.synthetic.main.toolbar.*
 
-class ThisTrainingActivity : GeneralActivityWithAppBar(), IThisTrainingView {
+class ThisTrainingActivity : GeneralActivityWithAppBar() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,22 +24,4 @@ class ThisTrainingActivity : GeneralActivityWithAppBar(), IThisTrainingView {
                 setOf(R.id.fragment_this_training, R.id.fragment_training_choice, R.id.fragment_create_exercise)))
         nav_view.setupWithNavController(navController)
     }
-
-    override fun showProgress() {
-        showProgressView()
-    }
-
-    override fun hideProgress() {
-        hideProgressView()
-    }
-
-    override fun showError(error: String, code: Int) {
-        showErrorSnack(error)
-    }
-
-    override fun showError(error: Int, code: Int) {
-        showErrorSnack(error.toString())
-    }
-
-
 }

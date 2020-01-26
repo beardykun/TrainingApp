@@ -17,10 +17,9 @@ import org.jetbrains.anko.noButton
 import org.jetbrains.anko.yesButton
 
 
-class TrainingActivity : GeneralActivityWithAppBar(), ITrainingView,
+class TrainingActivity : GeneralActivityWithAppBar(),
         TrainingAdapter.OnTrainingItemListener, TrainingAdapter.OnTrainingItemLongListener {
 
-    private var presenter: ITrainingPresenter? = null
     private var trainingViewModel: TrainingViewModel? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,41 +28,31 @@ class TrainingActivity : GeneralActivityWithAppBar(), ITrainingView,
 
         trainingViewModel = ViewModelProviders.of(this).get(TrainingViewModel::class.java)
         toolbar_text.text = this::class.java.simpleName
-        presenter = TrainingPresenter()
-
-        toolbar_text.text = this::class.java.simpleName
-
     }
 
-    override fun updateList(trainingName: String) {
+    fun updateList(trainingName: String) {
         trainingViewModel?.let { it.insertTraining(TrainingObject(null, trainingName)) }
     }
 
-    override fun startActivity() {
+    private fun deleteTraining(training: TrainingObject) {
+        if (training.trainingName == Constants.DEFAULT_SET) {
+            showErrorSnack("Sorry, can't delete ${Constants.DEFAULT_SET}")
+        }
+    }
+
+    private fun startTraining() {
+        if (!MySharedPreferences.isInside(Constants.SAVE_START_TIME)) {
+            val startTime = System.currentTimeMillis()
+            MySharedPreferences.saveLong(Constants.SAVE_START_TIME, startTime)
+        }
         startActivity(ThisTrainingActivity::class.java)
-    }
-
-    override fun showProgress() {
-        showProgressView()
-    }
-
-    override fun hideProgress() {
-        hideProgressView()
-    }
-
-    override fun showError(error: String, code: Int) {
-        showErrorSnack(error)
-    }
-
-    override fun showError(error: Int, code: Int) {
-        showErrorSnack(error.toString())
     }
 
     override fun onTrainingListItemClick(name: String) {
         alert("Start Training", "Start training timer?") {
             yesButton {
                 MySharedPreferences.saveString(Constants.SAVE_TRAINING_NAME, name)
-                presenter?.startTraining()
+                startTraining()
             }
             noButton { }
         }.show()
@@ -73,7 +62,7 @@ class TrainingActivity : GeneralActivityWithAppBar(), ITrainingView,
         alert("Delete", "Want to delete this Training?") {
             yesButton {
                 (trainingViewModel?.getTraining(name)?.observe(this@TrainingActivity,
-                        Observer { training -> presenter?.deleteTraining(training!!) }))
+                        Observer { training -> deleteTraining(training) }))
             }
             noButton { }
         }.show()
@@ -81,18 +70,12 @@ class TrainingActivity : GeneralActivityWithAppBar(), ITrainingView,
 
     override fun onStart() {
         super.onStart()
-        presenter?.onAttachView(this)
         addTrainingBtn.setOnClickListener {
             val fm = supportFragmentManager
             val fragment = CreateTrainingFragment()
             fm.let { fragment.show(fm, "tag") }
         }
         setAdapter()
-    }
-
-    override fun onStop() {
-        presenter?.onDetachView()
-        super.onStop()
     }
 
     private fun setAdapter() {

@@ -13,12 +13,11 @@ import com.iamagamedev.trainingapp.app.Constants
 import com.iamagamedev.trainingapp.app.MySharedPreferences
 import com.iamagamedev.trainingapp.dataBase.TrainingViewModel
 import com.iamagamedev.trainingapp.dataBase.objects.TrainingObject
-import com.iamagamedev.trainingapp.ui.thisTraining.fragments.ThisTrainingActivity
+import com.iamagamedev.trainingapp.utils.Utils
 import kotlinx.android.synthetic.main.fragment_this_training.*
 
-class ThisTrainingFragment : Fragment(), IThisTrainingView {
+class ThisTrainingFragment : Fragment() {
 
-    private var presenter: IThisTrainingPresenter? = null
     var trainingViewModel: TrainingViewModel? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -28,43 +27,26 @@ class ThisTrainingFragment : Fragment(), IThisTrainingView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        presenter = ThisTrainingPresenter()
         trainingViewModel = ViewModelProviders.of(this).get(TrainingViewModel::class.java)
-
     }
 
     override fun onStart() {
         super.onStart()
-        presenter?.onAttachView(this)
         trainingViewModel?.getTraining(MySharedPreferences.getString(Constants.SAVE_TRAINING_NAME))
                 ?.observe(viewLifecycleOwner, Observer<TrainingObject> { training ->
-                    presenter?.getAdapter(training!!)
+                    val list = Utils.stringToList(training.trainingExerciseNameList)
+
+                    val adapter = ThisTrainingAdapter()
+                    adapter.swapAdapter(list)
+                    recyclerViewThisTraining.adapter = adapter
+                    MySharedPreferences.saveString(
+                            Utils.getCurrentTrainingList(),
+                            Utils.listToString(list))
                 })
     }
 
     override fun onStop() {
-        presenter?.onDetachView()
         trainingViewModel = null
         super.onStop()
-    }
-
-    override fun setAdapter(adapter: ThisTrainingAdapter) {
-        recyclerViewThisTraining.adapter = adapter
-    }
-
-    override fun showProgress() {
-        (activity as ThisTrainingActivity).showProgressView()
-    }
-
-    override fun hideProgress() {
-        (activity as ThisTrainingActivity).hideProgressView()
-    }
-
-    override fun showError(error: String, code: Int) {
-        (activity as ThisTrainingActivity).showErrorSnack(error)
-    }
-
-    override fun showError(error: Int, code: Int) {
-        (activity as ThisTrainingActivity).showErrorSnack(error.toString())
     }
 }

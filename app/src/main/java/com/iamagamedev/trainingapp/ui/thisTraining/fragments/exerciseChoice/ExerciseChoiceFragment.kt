@@ -1,6 +1,7 @@
 package com.iamagamedev.trainingapp.ui.thisTraining.fragments.exerciseChoice
 
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,14 +14,16 @@ import com.iamagamedev.trainingapp.app.Constants
 import com.iamagamedev.trainingapp.app.MySharedPreferences
 import com.iamagamedev.trainingapp.dataBase.ExerciseViewModel
 import com.iamagamedev.trainingapp.dataBase.TrainingViewModel
+import com.iamagamedev.trainingapp.dataBase.objects.ExerciseObject
 import com.iamagamedev.trainingapp.dataBase.objects.TrainingObject
 import com.iamagamedev.trainingapp.ui.thisTraining.fragments.ThisTrainingActivity
+import com.iamagamedev.trainingapp.utils.Utils
 import kotlinx.android.synthetic.main.activity_exercices.*
+import org.jetbrains.anko.backgroundColor
 
-class ExerciseChoiceFragment : Fragment(), IExerciseChoiceView,
-        ExercisesChoiceAdapter.OnExerciseChoiceItemListener {
+class ExerciseChoiceFragment : Fragment(), ExercisesChoiceAdapter.OnExerciseChoiceItemListener {
 
-    private var presenter: IExerciseChoicePresenter? = null
+    private val list: MutableList<String> = mutableListOf()
     var exerciseViewModel: ExerciseViewModel? = null
     var trainingViewModel: TrainingViewModel? = null
 
@@ -32,7 +35,6 @@ class ExerciseChoiceFragment : Fragment(), IExerciseChoiceView,
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        presenter = ExerciseChoicePresenter()
 
         exerciseViewModel = ViewModelProviders.of(this).get(ExerciseViewModel::class.java)
         trainingViewModel = ViewModelProviders.of(this).get(TrainingViewModel::class.java)
@@ -40,50 +42,78 @@ class ExerciseChoiceFragment : Fragment(), IExerciseChoiceView,
 
     override fun onStart() {
         super.onStart()
-        presenter?.onAttachView(this)
         setAdapter()
     }
 
-    override fun onStop() {
-        presenter?.onDetachView()
-        super.onStop()
-    }
-
-    override fun showProgress() {
+    private fun showProgress() {
         (activity as ThisTrainingActivity).showProgressView()
     }
 
-    override fun hideProgress() {
+    private fun hideProgress() {
         (activity as ThisTrainingActivity).hideProgressView()
     }
 
-    override fun showError(error: String, code: Int) {
+    private fun showError(error: String, code: Int) {
         (activity as ThisTrainingActivity).showErrorSnack(error)
     }
 
-    override fun showError(error: Int, code: Int) {
+    private fun showError(error: Int, code: Int) {
         (activity as ThisTrainingActivity).showErrorSnack(error.toString())
     }
 
     override fun onExerciseChoiceItemClick(trainingName: String, view: View) {
-        presenter?.addRemoveExercise(trainingName, view)
+        addRemoveExercise(trainingName, view)
+    }
+
+    private fun addRemoveExercise(exerciseName: String, view: View) {
+        if (list.contains(exerciseName)) {
+            list.remove(exerciseName)
+            view.backgroundColor = Color.WHITE
+        } else {
+            list.add(exerciseName)
+            view.backgroundColor = Color.BLUE
+        }
+        addToTraining()
     }
 
     private fun setAdapter() {
         val adapter = ExercisesChoiceAdapter()
         exerciseViewModel?.getAllExercises()?.observe(viewLifecycleOwner, Observer { exerciseList ->
-            adapter.swapAdapter(presenter!!.getList(exerciseList!!))
+            adapter.swapAdapter(getList(exerciseList!!))
         })
         adapter.setOnExerciseChoiceItemListener(this)
         exerciseChoiceRecyclerView.adapter = adapter
     }
 
-    override fun addToTraining() {
+    private fun addToTraining() {
         trainingViewModel?.getTraining(MySharedPreferences.getString(Constants.SAVE_TRAINING_NAME))!!
                 .observe(viewLifecycleOwner,
                         Observer<TrainingObject> { training ->
-                            training?.trainingExerciseNameList = presenter?.getNewTrainingList()!!
+                            training?.trainingExerciseNameList = buildString()
                             training?.let { trainingViewModel?.updateTraining(it) }
                         })
+    }
+
+    private fun getList(exerciseList: List<ExerciseObject>): List<ExerciseObject> {
+        val oldList = Utils.stringToList(MySharedPreferences.getString(Utils.getCurrentTrainingList()))
+        val newExList: MutableList<ExerciseObject> = mutableListOf()
+        for (i in exerciseList) {
+            if (!oldList.contains(i.exerciseName)) {
+                newExList.add(i)
+            }
+        }
+        return newExList
+    }
+
+    private fun buildString(): String {
+        return if (MySharedPreferences.isInside(Utils.getCurrentTrainingList())) {
+            val sb = StringBuilder()
+            sb.append(MySharedPreferences.getString(Utils.getCurrentTrainingList()))
+            sb.append(" , ")
+            sb.append(Utils.listToString(list))
+            sb.toString()
+        } else {
+            Utils.listToString(list)
+        }
     }
 }
