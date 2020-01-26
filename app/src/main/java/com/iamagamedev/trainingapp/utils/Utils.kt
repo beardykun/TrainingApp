@@ -12,7 +12,7 @@ class Utils {
         fun listToString(list: MutableList<String>): String {
             val stringBuilder = StringBuilder()
             for (i in 0 until list.size) {
-                if (list[i] != "") {
+                if (!i.equals("")) {
                     if (i != list.size - 1)
                         stringBuilder.append("${list[i]} , ")
                     else
@@ -23,10 +23,10 @@ class Utils {
         }
 
         fun stringToList(string: String): MutableList<String> {
-            return if (string != "")
+            return if (string != Constants.EMPTY_STRING && string != "")
                 string.split(" , ").toMutableList()
             else
-                mutableListOf()
+                mutableListOf(Constants.EMPTY_STRING)
         }
 
         fun getCurrentTime(): String {

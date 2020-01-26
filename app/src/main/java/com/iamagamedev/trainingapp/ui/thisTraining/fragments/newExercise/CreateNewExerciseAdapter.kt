@@ -1,4 +1,4 @@
-package com.iamagamedev.trainingapp.ui.createNewExercise
+package com.iamagamedev.trainingapp.ui.thisTraining.fragments.newExercise
 
 import android.view.LayoutInflater
 import android.view.View
@@ -21,7 +21,7 @@ class CreateNewExerciseAdapter : RecyclerView.Adapter<CreateNewExerciseAdapter.C
         fun chooseMuscleGroup(imageId: Int, muscleGroup: String)
     }
 
-    private var listener:OnCreateNewExerciseListener? = null
+    private var listener: OnCreateNewExerciseListener? = null
 
     fun setOnCreateNewExerciseListener(listener: OnCreateNewExerciseListener){
         this.listener = listener

@@ -3,12 +3,11 @@ package com.iamagamedev.trainingapp.ui.thisTraining.fragments.exerciseChoice
 
 import android.content.Context
 import android.graphics.Color
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.Observer
-import com.iamagamedev.trainingapp.R
 import com.iamagamedev.trainingapp.app.Constants
 import com.iamagamedev.trainingapp.app.MySharedPreferences
-import com.iamagamedev.trainingapp.app.ThisApplication
 import com.iamagamedev.trainingapp.dataBase.TrainingViewModel
 import com.iamagamedev.trainingapp.dataBase.objects.ExerciseObject
 import com.iamagamedev.trainingapp.dataBase.objects.TrainingObject
@@ -44,15 +43,14 @@ class ExerciseChoiceInteractor : IExerciseChoiceInteractor {
         return newExList
     }
 
-    override fun addToTraining(trainingViewModel: TrainingViewModel, context: Context,
-                               listener: IExerciseChoiceInteractor.OnExerciseChoiceListener) {
-        //FIXME refactor, trainingViewModel should not be here
-        val newExList: String = if (MySharedPreferences.isInside(Utils.getCurrentTrainingList())) {
+    override fun addToTraining(listener: IExerciseChoiceInteractor.OnExerciseChoiceListener): String {
+        listener.onSuccess()
+        return buildString()
+    }
+
+    private fun buildString(): String {
+        return if (MySharedPreferences.isInside(Utils.getCurrentTrainingList())) {
             val sb = StringBuilder()
-            if (list.size == 0) {
-                listener.onSuccess()
-                return
-            }
             sb.append(MySharedPreferences.getString(Utils.getCurrentTrainingList()))
             sb.append(" , ")
             sb.append(Utils.listToString(list))
@@ -60,14 +58,6 @@ class ExerciseChoiceInteractor : IExerciseChoiceInteractor {
         } else {
             Utils.listToString(list)
         }
-
-        trainingViewModel.getTraining(MySharedPreferences.getString(Constants.SAVE_TRAINING_NAME))
-                .observe(context as ThisTrainingActivity,
-                Observer<TrainingObject> { training ->
-                    training?.trainingExerciseNameList = newExList
-                    training?.let { trainingViewModel.updateTraining(it) }
-                })
-        listener.onSuccess()
     }
 }
 

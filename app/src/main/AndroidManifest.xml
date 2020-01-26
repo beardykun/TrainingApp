@@ -14,10 +14,6 @@
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".ui.main.MainActivity">
         </activity>
-        <activity
-            android:name=".ui.thisTraining.fragments.exerciseChoice.ExerciseChoiceActivity"
-            android:parentActivityName=".ui.thisTraining.fragments.ThisTrainingActivity">
-        </activity>
 
         <activity
             android:name=".ui.story.StoryActivity"
@@ -42,9 +38,6 @@
         <activity
             android:name=".ui.thisTraining.fragments.ThisTrainingActivity"
             android:parentActivityName=".ui.training.TrainingActivity">
-        </activity>
-        <activity android:name=".ui.createNewExercise.CreateNewExerciseActivity"
-            android:parentActivityName=".ui.thisTraining.fragments.exerciseChoice.ExerciseChoiceActivity">
         </activity>
     </application>
 

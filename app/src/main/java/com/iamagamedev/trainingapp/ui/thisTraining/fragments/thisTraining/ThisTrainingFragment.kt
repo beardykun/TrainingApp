@@ -7,9 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.iamagamedev.trainingapp.R
 import com.iamagamedev.trainingapp.app.Constants
 import com.iamagamedev.trainingapp.app.MySharedPreferences
+import com.iamagamedev.trainingapp.dataBase.TrainingViewModel
 import com.iamagamedev.trainingapp.dataBase.objects.TrainingObject
 import com.iamagamedev.trainingapp.ui.thisTraining.fragments.ThisTrainingActivity
 import kotlinx.android.synthetic.main.fragment_this_training.*
@@ -17,29 +19,32 @@ import kotlinx.android.synthetic.main.fragment_this_training.*
 class ThisTrainingFragment : Fragment(), IThisTrainingView {
 
     private var presenter: IThisTrainingPresenter? = null
+    var trainingViewModel: TrainingViewModel? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_this_training, container, false)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         presenter = ThisTrainingPresenter()
+        trainingViewModel = ViewModelProviders.of(this).get(TrainingViewModel::class.java)
+
     }
 
     override fun onStart() {
         super.onStart()
         presenter?.onAttachView(this)
-        (activity as ThisTrainingActivity).trainingViewModel?.getTraining(MySharedPreferences.getString(Constants.SAVE_TRAINING_NAME))
-                ?.observe(this, Observer<TrainingObject> { training ->
+        trainingViewModel?.getTraining(MySharedPreferences.getString(Constants.SAVE_TRAINING_NAME))
+                ?.observe(viewLifecycleOwner, Observer<TrainingObject> { training ->
                     presenter?.getAdapter(training!!)
                 })
     }
 
     override fun onStop() {
         presenter?.onDetachView()
+        trainingViewModel = null
         super.onStop()
     }
 

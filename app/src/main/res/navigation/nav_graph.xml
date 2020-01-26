@@ -7,14 +7,20 @@
 
     <fragment
         android:id="@+id/fragment_this_training"
-        android:label="FragmentThisTraining"
         android:name="com.iamagamedev.trainingapp.ui.thisTraining.fragments.thisTraining.ThisTrainingFragment"
+        android:label="FragmentThisTraining"
         tools:layout="@layout/fragment_this_training" />
 
     <fragment
         android:id="@+id/fragment_training_choice"
-        android:label="FragmentTrainingChoice"
         android:name="com.iamagamedev.trainingapp.ui.thisTraining.fragments.exerciseChoice.ExerciseChoiceFragment"
+        android:label="FragmentTrainingChoice"
         tools:layout="@layout/fragment_this_training" />
+
+    <fragment
+        android:id="@+id/fragment_create_exercise"
+        android:name="com.iamagamedev.trainingapp.ui.thisTraining.fragments.newExercise.CreateNewExerciseFragment"
+        android:label="FragmentCreateExercise"
+        tools:layout="@layout/fragment_create_new_exercise" />
 
 </navigation>

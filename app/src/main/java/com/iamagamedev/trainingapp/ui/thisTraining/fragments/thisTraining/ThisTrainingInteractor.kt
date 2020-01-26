@@ -8,22 +8,14 @@ import com.iamagamedev.trainingapp.utils.Utils
 class ThisTrainingInteractor : IThisTrainingInteractor {
 
     override fun getAdapter(training: TrainingObject, listener: IThisTrainingInteractor.OnThisTrainingListener) {
-        try {
-            val list = Utils.stringToList(training.trainingExerciseNameList)
-            /*if (list.contains(Constants.EMPTY_STRING)) {
 
-                return
-            }*/
-                val adapter = ThisTrainingAdapter()
-                adapter.swapAdapter(list)
-                MySharedPreferences.saveString(
-                        Utils.getCurrentTrainingList(),
-                        Utils.listToString(list))
-                listener.getAdapterSuccess(adapter)
+        val list = Utils.stringToList(training.trainingExerciseNameList)
 
-        } catch (e: IllegalStateException) {
-            e.printStackTrace()
-            listener.onError("add request for user to add some exercises", 10)
-        }
+        val adapter = ThisTrainingAdapter()
+        adapter.swapAdapter(list)
+        MySharedPreferences.saveString(
+                Utils.getCurrentTrainingList(),
+                Utils.listToString(list))
+        listener.getAdapterSuccess(adapter)
     }
 }

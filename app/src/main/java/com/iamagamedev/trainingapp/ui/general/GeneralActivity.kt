@@ -28,16 +28,16 @@ abstract class GeneralActivity : AppCompatActivity() {
         showErrorSnack(error, coordinatorLayout)
     }
 
-    private fun showErrorSnack(error: String, coordinatorLayout: CoordinatorLayout?) {
+    private fun showErrorSnack(error: CharSequence, coordinatorLayout: CoordinatorLayout) {
         val snackbar = Snackbar
-                .make(coordinatorLayout!!, error, Snackbar.LENGTH_INDEFINITE)
+                .make(coordinatorLayout, error, Snackbar.LENGTH_INDEFINITE)
                 .setAction(R.string.app_error_dismiss) { }
 
         snackbar.view.setBackgroundColor(ContextCompat.getColor(this, R.color.white))
         snackbar.setActionTextColor(ContextCompat.getColor(this, R.color.black))
 
         val sbView = snackbar.view
-        val textView = sbView.find<TextView>(com.google.android.material.R.id.snackbar_action)
+        val textView = sbView.find<TextView>(com.google.android.material.R.id.snackbar_text)
         textView.setTextColor(ContextCompat.getColor(this, R.color.black))
         textView.maxLines = 10
         snackbar.show()

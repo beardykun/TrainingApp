@@ -1,4 +1,4 @@
-package com.iamagamedev.trainingapp.ui.createNewExercise
+package com.iamagamedev.trainingapp.ui.thisTraining.fragments.newExercise
 
 import com.iamagamedev.trainingapp.dataBase.objects.ExerciseObject
 
@@ -19,8 +19,9 @@ class CreateNewExercisePresenter(private val interactor: ICreateNewExerciseInter
         view?.hideProgress()
     }
 
-    override fun onSuccessDBInsert() {
+    override fun onSuccessDBInsert(exObject: ExerciseObject) {
         view?.hideProgress()
+        view?.addExToDatabase(exObject)
     }
 
     override fun onError(error: String, code: Int) {
@@ -33,8 +34,8 @@ class CreateNewExercisePresenter(private val interactor: ICreateNewExerciseInter
         view?.showError(error, code)
     }
 
-    override fun addExerciseToDb(exerciseObject: ExerciseObject?, exName: String, exGroupName: String, exImageId: Int) {
+    override fun addExerciseToDb(isExerciseInside: Boolean, exName: String, exGroupName: String, exImageId: Int) {
         view?.showProgress()
-        interactor.addExerciseToDb(exerciseObject, exName, exGroupName, exImageId, this)
+        interactor.addExerciseToDb(isExerciseInside, exName, exGroupName, exImageId, this)
     }
 }
